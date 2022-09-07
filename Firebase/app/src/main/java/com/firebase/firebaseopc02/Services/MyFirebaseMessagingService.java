@@ -26,8 +26,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     //Definición de las variables
     private static final String CHANNEL_ID = "canal";
     private PendingIntent pendingIntent;
-    String title = "";
-    String details = "";
+    String ejem1 = "";
+    String ejem2 = "";
 
     /**
      * Genera y muestra el nuevo token del dispositivo, este se genera al instalar la aplicación
@@ -78,12 +78,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //Obtener datos enviados mediante key/value
         if (remoteMessage.getData().size() > 0) {
 
-            Log.e("TAG", "Lo enviado primero: " + remoteMessage.getData().get("title"));
-            Log.e("TAG", "Lo enviado segundo: " + remoteMessage.getData().get("details"));
+            Log.e("TAG", "Lo enviado primero: " + remoteMessage.getData().get("ejem1"));
+            Log.e("TAG", "Lo enviado segundo: " + remoteMessage.getData().get("ejem2"));
 
-            //Obtener datos de la notificación en segundo plato
-            title = remoteMessage.getNotification().getTitle();
-            details = remoteMessage.getNotification().getBody();
+            //Obtener datos de la notificación en segundo plano. Se envia la key como parámetro del GET
+            ejem1 = remoteMessage.getData().get("ejem1");
+            ejem2 = remoteMessage.getData().get("ejem2");
 
             showNotification();
 
@@ -107,8 +107,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),
                 CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo_wienerlab)
-                .setContentTitle(title)
-                .setContentText(details)
+                .setContentTitle(ejem1)
+                .setContentText(ejem2)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setStyle(new NotificationCompat.BigTextStyle()
